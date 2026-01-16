@@ -1,8 +1,27 @@
 body{
-  background-color: rgb(140, 158, 167);
+  background-color: rgb(1, 42, 62);
   margin:0;
   padding:0;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+
+}
+.content-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+}
+.note-pad{
+  width:80%;
+  margin-left: 100px;
+  height: 500px;
+  margin-top:0px;
+  border-radius: 8px;
+  padding: 5px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+
 
 }
 
@@ -47,6 +66,7 @@ body{
 }
 
 .side-bar{
+  position:fixed;
   background-color: #333;
   margin-top: 1px;
   padding: 2px;
@@ -75,9 +95,6 @@ body{
   color:#ffffff;
   padding-right: 30px;
   cursor:pointer;
-  
-
-  
   
 }
 

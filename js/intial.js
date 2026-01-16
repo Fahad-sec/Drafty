@@ -1,12 +1,26 @@
 
 function sideBar() {
-  const headerButton = document.querySelector('.js-header-button');
+  const sideHeaderButton = document.querySelector('.js-side-header-button');
   const sidebar = document.querySelector('.js-side-bar');
   const sideHeader = document.querySelector('.js-side-header');
-  headerButton.addEventListener('click', () => {
-    sidebar.classList.toggle('side-bar-hidden')
-    sideHeader.classList.toggle('side-header-hide')
+  sideHeaderButton.addEventListener('click', () => {
+    sidebar.classList.toggle('side-bar-hidden');
+    sideHeader.classList.toggle('side-header-hide');
+    
+    if (sideHeaderButton.innerHTML === '&lt;') {
+    sideHeaderButton.innerHTML = '&gt;'
+    } else {
+      sideHeaderButton.innerHTML = '&lt;'
+    }
   })
 };
 
-sideBar()
+function reloadPage() {
+  const draftyHeader = document.querySelector('.js-drafty-header');
+  draftyHeader.addEventListener('click', () => {
+    window.location.reload();
+  });
+};
+
+reloadPage();
+sideBar();

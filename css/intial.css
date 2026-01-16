@@ -2,35 +2,47 @@ body{
   background-color: rgb(140, 158, 167);
   margin:0;
   padding:0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 
+}
+
+.main-header{
+  background-color:#333;  
+  height: 100px;
+  width:100%;
+  margin:0;
+  padding:0;
+  display: flex;
+  justify-content:center;
+  border:5px #000000;
 }
 
 .drafty-header{
-  color: #333;
-  border: 1px #333;
-  background-color:#000000;
-  font-size:50px
-
+  margin:0;
+ text-align:center; 
+ cursor:pointer;
+ color: #ffffff;
 }
 
 .side-header{
-  border: 1px solid #333;
-  width: 90px;
-  margin-top: 50px;
+  border: 2px solid #000000;
+  width: 95px;
   background-color:#333;
   color:#ffffff;
   font-size: 15px;
+  margin-top: 2px
 }
 
 .side-header-hide{
-  transform: translateX(-70%)
+  transform: translateX(-75%)
 }
 
-.header-button{
+.side-header-button{
   background-color:#000000;
   color:#ffffff;
   font-size: 15px;
-  cursor:pointer
+  cursor:pointer;
+  margin-left:3px;
 
 }
 
@@ -38,7 +50,7 @@ body{
   background-color: #333;
   margin-top: 1px;
   padding: 2px;
-  width: 100px;
+  width: 95px;
   border: 2px solid #333;
   display: flex;
   flex-direction:column;
@@ -58,7 +70,8 @@ body{
 
 
 .item-1, .item-2, .item-3 {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight:500px;
   color:#ffffff;
   padding-right: 30px;
   cursor:pointer;

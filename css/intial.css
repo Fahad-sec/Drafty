@@ -6,16 +6,35 @@ body{
 
 }
 .content-container{
+  margin-top:30px;
+  position:relative;
   display:flex;
   justify-content:center;
   align-items:center;
 
 }
+
+.save-button{
+  position:absolute;
+  top:-3px;
+  right:8%;
+  color:#ffffff;
+  font-size:15px;
+  font-family: inherit;
+  background-color:#0fbf38;
+  border:#000000;
+  margin-right:none;
+  border-radius: 8px;
+  width:100px;
+  height: 30px;
+  cursor:pointer;
+  
+}
 .note-pad{
   width:80%;
   margin-left: 100px;
   height: 500px;
-  margin-top:0px;
+  margin-top:30px;
   border-radius: 8px;
   padding: 5px;
   display:flex;
@@ -44,12 +63,15 @@ body{
 }
 
 .side-header{
+  position:fixed;
+  z-index:100;
   border: 2px solid #000000;
   width: 95px;
   background-color:#333;
   color:#ffffff;
   font-size: 15px;
-  margin-top: 2px
+  font-family:inherit;
+  margin-top: 0px
 }
 
 .side-header-hide{
@@ -65,10 +87,19 @@ body{
 
 }
 
+.side-bar::-webkit-scrollbar {
+  width: 10px;
+}
+.side-bar::-webkit-scrollbar-thumb{
+  background: #555;
+  border-radius:10px;
+}
 .side-bar{
+
+  z-index:99;
   position:fixed;
   background-color: #333;
-  margin-top: 1px;
+  top: 128px;
   padding: 2px;
   width: 95px;
   border: 2px solid #333;
@@ -76,8 +107,9 @@ body{
   flex-direction:column;
   justify-content:space-evenly;
   gap: 10px;
-  height: 700px;
+  height: calc(100vh - 135px);
   overflow-y: auto;
+  overflow-x:hidden;
   align-items:center;
   transition:1s;
 

@@ -1,4 +1,9 @@
-let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
+import {renderSideBar} from './render.js'
+
+
+export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
+
+
 let nextId = notesList.length > 0 ? notesList[notesList.length -1].id + 1 : 1;
 
 function createNote(textContent, title) {
@@ -23,7 +28,8 @@ saveButton.addEventListener('click', () => {
   notesList.push(newNote);
   console.log(notesList)
   saveToStorage();
-  resetPage();
+  renderSideBar(notesList);
+  
 
 });
 

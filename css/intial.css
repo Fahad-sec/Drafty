@@ -22,13 +22,24 @@ body{
   font-size:15px;
   font-family: inherit;
   background-color:#0fbf38;
-  border:#000000;
+  border: 2px#000000;
   margin-right:none;
   border-radius: 8px;
   width:100px;
   height: 30px;
   cursor:pointer;
   
+}
+.notes-title{
+  position:absolute;
+  top:-10px;
+  left:15%;
+  height:30px;
+  border-radius: 8px;
+  cursor:pointer;
+  border: 2px;
+  background-color:#333;
+  color:aliceblue
 }
 .note-pad{
   width:80%;
@@ -40,8 +51,8 @@ body{
   display:flex;
   justify-content:center;
   align-items: center;
-
-
+  background-color:#333;
+  color:aliceblue;
 }
 
 .main-header{

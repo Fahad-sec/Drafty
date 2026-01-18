@@ -29,12 +29,13 @@ saveButton.addEventListener('click', () => {
   console.log(notesList)
   saveToStorage();
   renderSideBar(notesList);
+  reloadPage();
   
 
 });
 renderSideBar(notesList)
 
-function resetPage () {
+function reloadPage () {
   window.location.reload()
 }
 
@@ -45,3 +46,11 @@ function saveToStorage() {
 
 console.log(JSON.parse(localStorage.getItem('notesList')))
 
+export function displayNoteContent(id) {
+  const selectedNote = notesList.find(note => note.id === Number(id))
+
+  if (selectedNote) {
+    document.querySelector('.js-notes-title').value = selectedNote.title;
+    document.querySelector('.js-note-pad').value = selectedNote.body;
+  }
+ }

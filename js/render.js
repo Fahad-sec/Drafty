@@ -1,3 +1,5 @@
+import {displayNoteContent} from './storage.js'
+
 const sideBarElement = document.querySelector('.js-side-bar')
 
 export function renderSideBar(data) {
@@ -14,11 +16,16 @@ data.forEach((note) => {
 
 }
 
-sideBarElement.addEventListener('click', () => {
+sideBarElement.addEventListener('click', (event) => {
   const noteElement = event.target.closest(`.note-item`);
 
   if (noteElement) {
     const id = noteElement.dataset.noteId;
     console.log('clicked note id :', id);
+      displayNoteContent(id)
+
   }
+  
+
 })
+

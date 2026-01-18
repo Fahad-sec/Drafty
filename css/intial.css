@@ -116,14 +116,22 @@ body{
   border: 2px solid #333;
   display: flex;
   flex-direction:column;
-  justify-content:space-evenly;
-  gap: 10px;
+  justify-content:flex-start;
+  gap: 13px;
   height: calc(100vh - 135px);
   overflow-y: auto;
   overflow-x:hidden;
-  align-items:center;
   transition:1s;
 
+}
+
+.note-item{
+  font-size: 15px;
+  border: 1px solid #555;
+  color:aliceblue;
+  font-family:inherit;
+  width: 92px;
+  cursor:pointer;
 }
 
 .side-bar-hidden{

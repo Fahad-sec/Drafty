@@ -44,3 +44,4 @@ function saveToStorage() {
 
 
 console.log(JSON.parse(localStorage.getItem('notesList')))
+

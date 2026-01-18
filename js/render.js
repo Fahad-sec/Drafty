@@ -5,7 +5,7 @@ sideBarElement.innerHTML = '';
 
 data.forEach((note) => {
   const html = `
-  <div class="note-item" data-id="${note.id}">
+  <div class="note-item" data-note-id="${note.id}">
   ${note.title}
   </div>
   `;
@@ -13,3 +13,12 @@ data.forEach((note) => {
 })
 
 }
+
+sideBarElement.addEventListener('click', () => {
+  const noteElement = event.target.closest(`.note-item`);
+
+  if (noteElement) {
+    const id = noteElement.dataset.noteId;
+    console.log('clicked note id :', id);
+  }
+})

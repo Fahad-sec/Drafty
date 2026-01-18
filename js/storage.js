@@ -35,7 +35,7 @@ saveButton.addEventListener('click', () => {
 });
 renderSideBar(notesList)
 
-function reloadPage () {
+export function reloadPage () {
   window.location.reload()
 }
 

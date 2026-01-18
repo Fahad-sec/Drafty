@@ -26,6 +26,5 @@ sideBarElement.addEventListener('click', (event) => {
 
   }
   
-
 })
 

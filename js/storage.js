@@ -54,3 +54,4 @@ export function displayNoteContent(id) {
     document.querySelector('.js-note-pad').value = selectedNote.body;
   }
  }
+

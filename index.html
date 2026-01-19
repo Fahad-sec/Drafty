@@ -19,11 +19,21 @@
          
         </div>
         <main class="content-container">
-          <input placeholder="Title" class="notes-title js-notes-title">
-          <button class="clear-button js-clear-button">Clear</button>
-          <button class="delete-button js-delete-button">Delete</button>
-          <button class="save-button js-save-button">Save</button>
+          <div class="notepads-controls-top">
+            <input placeholder="Title" class="notes-title js-notes-title">
+            <div class="button-group">
+              <button class="clear-button js-clear-button">Clear</button>
+              <button class="save-button js-save-button">Save</button>
+           </div>
+          </div>
+
           <textarea class="note-pad js-note-pad" placeholder="Start typing your notes...."></textarea>
+          
+          <div class="notepads-control-bottom">
+             <button class="delete-button js-delete-button">Delete</button>
+          </div>
+          
+          
         </main>
         <script src="js/intial.js" type="module"></script>
         <script src="js/storage.js" type="module"></script>

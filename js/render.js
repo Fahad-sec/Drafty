@@ -1,6 +1,8 @@
-import {displayNoteContent} from './storage.js'
-
+import {displayNoteContent, deleteNote} from './storage.js'
 const sideBarElement = document.querySelector('.js-side-bar')
+
+let currentOpenNoteId = null;
+
 
 export function renderSideBar(data) {
 sideBarElement.innerHTML = '';
@@ -16,15 +18,28 @@ data.forEach((note) => {
 
 }
 
+
 sideBarElement.addEventListener('click', (event) => {
   const noteElement = event.target.closest(`.note-item`);
 
   if (noteElement) {
+    currentOpenNoteId = noteElement.dataset.noteId;
     const id = noteElement.dataset.noteId;
     console.log('clicked note id :', id);
-      displayNoteContent(id)
+      displayNoteContent(currentOpenNoteId)
 
   }
   
+})
+
+const deleteButton = document.querySelector('.js-delete-button');
+
+deleteButton.addEventListener('click', () => {
+
+  if (currentOpenNoteId) {
+     deleteNote(currentOpenNoteId);
+     currentOpenNoteId = null;
+     saveToStorage();
+  }
 })
 

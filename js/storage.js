@@ -1,5 +1,5 @@
 import {renderSideBar} from './render.js'
-
+import {clearData} from './buttons.js'
 
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
 
@@ -29,8 +29,7 @@ saveButton.addEventListener('click', () => {
   console.log(notesList)
   saveToStorage();
   renderSideBar(notesList);
-  reloadPage();
-  
+  clearData();  
 
 });
 renderSideBar(notesList)
@@ -44,8 +43,6 @@ function saveToStorage() {
 }
 
 
-console.log(JSON.parse(localStorage.getItem('notesList')))
-
 export function displayNoteContent(id) {
   const selectedNote = notesList.find(note => note.id === Number(id))
 
@@ -55,3 +52,14 @@ export function displayNoteContent(id) {
   }
  }
 
+
+export function deleteNote(id) {
+  const index  = notesList.findIndex(note => note.id == Number(id));
+
+  if (index !== -1) {
+    notesList.splice(index, 1);
+    saveToStorage();
+    clearData();
+    renderSideBar(notesList);
+  }
+}

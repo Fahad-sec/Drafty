@@ -16,7 +16,7 @@ function sideBar() {
 };
 
 function reloadPage() {
-  const draftyHeader = document.querySelector('.js-drafty-header');
+  const draftyHeader = document.querySelector('.js-logo-img');
   draftyHeader.addEventListener('click', () => {
     window.location.reload();
   });

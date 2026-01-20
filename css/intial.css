@@ -5,6 +5,32 @@ body{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 
 }
+
+
+.header-content{ 
+  display:flex;
+  align-items: center;
+  gap: 15px;
+}
+.main-header{
+  background-color:#333;  
+  height: 100px;
+  width:100%;
+  margin:0;
+  padding:0;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  border:5px #000000;
+}
+
+
+.logo-img {
+  height: 60px;
+  width:auto;
+  border-radius: 8px;
+  cursor:pointer;
+}
 .content-container{
   margin-top:30px;
   margin-left:120px;
@@ -96,21 +122,11 @@ body{
   margin-top: 10px;
 }
 
-.main-header{
-  background-color:#333;  
-  height: 100px;
-  width:100%;
-  margin:0;
-  padding:0;
-  display: flex;
-  justify-content:center;
-  border:5px #000000;
-}
+
 
 .drafty-header{
   margin:0;
  text-align:center; 
- cursor:pointer;
  color: #ffffff;
 }
 

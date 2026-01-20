@@ -27,7 +27,6 @@ sideBarElement.addEventListener('click', (event) => {
   if (noteElement) {
     currentOpenNoteId = noteElement.dataset.noteId;
     const id = noteElement.dataset.noteId;
-    console.log('clicked note id :', id);
       displayNoteContent(currentOpenNoteId)
 
   }

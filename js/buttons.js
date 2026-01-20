@@ -1,3 +1,6 @@
+import {resetCurrentNoteId} from './render.js'
+
+
 const clearButton = document.querySelector('.js-clear-button');
 
 clearButton.addEventListener('click', () => {
@@ -7,4 +10,5 @@ clearButton.addEventListener('click', () => {
 export function clearData() {
   document.querySelector('.js-note-pad').value = '';
   document.querySelector('.js-notes-title').value = '';
+  resetCurrentNoteId();
 }

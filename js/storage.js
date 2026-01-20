@@ -1,5 +1,6 @@
 import {renderSideBar} from './render.js'
 import {clearData} from './buttons.js'
+import {resetCurrentNoteId, currentOpenNoteId} from './render.js'
 
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
 
@@ -23,13 +24,28 @@ saveButton.addEventListener('click', () => {
   const noteContent = document.querySelector('.js-note-pad').value;
   const notesTitle = document.querySelector('.js-notes-title').value;
   
-  const newNote = createNote(noteContent, notesTitle);
+  const existingNote = notesList.find(note => note.id === Number(currentOpenNoteId));
 
-  notesList.push(newNote);
-  console.log(notesList)
-  saveToStorage();
+  if (existingNote) {
+     existingNote.title = notesTitle;
+     existingNote.body = noteContent;
+     
+  } else if (noteContent === '' && notesTitle === '') {
+        return;
+  }
+  
+  else {
+    const newNote = createNote(noteContent, notesTitle);
+    notesList.push(newNote);
+
+  }
+  
   renderSideBar(notesList);
   clearData();  
+  saveToStorage();
+    resetCurrentNoteId();
+
+
 
 });
 renderSideBar(notesList)
@@ -61,5 +77,6 @@ export function deleteNote(id) {
     saveToStorage();
     clearData();
     renderSideBar(notesList);
+    resetCurrentNoteId();
   }
 }

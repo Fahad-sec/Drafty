@@ -1,8 +1,10 @@
 import {displayNoteContent, deleteNote} from './storage.js'
 const sideBarElement = document.querySelector('.js-side-bar')
 
-let currentOpenNoteId = null;
-
+export let currentOpenNoteId = null;
+ export function resetCurrentNoteId () {
+  currentOpenNoteId = null;
+ }
 
 export function renderSideBar(data) {
 sideBarElement.innerHTML = '';

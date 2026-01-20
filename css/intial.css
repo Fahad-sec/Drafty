@@ -209,21 +209,51 @@ body{
   
 }
 
-@media (max-width: 768) {
-  .notepads-control-top, .note-pad, .notpads-control-bottom {
-     width: 95%;
+@media (max-width: 768px) {
+
+  .content-container {
+    margin-left: 0 !important;
+    padding: 10px;
+    width: 100%;
+    box-sizing:border-box;
+
+  }
+  .notepads-controls-top{
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  .notes-title {
+    width: 100%;
+  }
+  .bottom-group button {
+    flex: 1;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .note-pad {
+    width: 100%;
+    height: 400px;
+    margin-top:15px;
+  }
+
+  .notepads-control-bottom {
+    width: 100%;
+    justify-content: flex-end;
+
   }
 
   .side-bar {
-    position: fixed;
-    top:0;
-    height: 100vh;
-    width: 70px;
-    z-index:102;
-  }
-  .content-container {
-    margin-left: 80px;
-    width: calc(100% -90px);
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 100px;
+    z-index:10;
   }
 }
 

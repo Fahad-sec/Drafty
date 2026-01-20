@@ -193,9 +193,9 @@ body{
   
 }
 
-@media (max-width: 768) {
-  .notepads-control-top, .note-pad, .notpads-control-bottom {
-     width: 95%;
+@media (max-width: 768px) {
+  .notepads-control-top, .note-pad, .notepads-control-bottom {
+     width: 95% !important;
   }
 
   .side-bar {
@@ -207,7 +207,11 @@ body{
   }
   .content-container {
     margin-left: 80px;
-    width: calc(100% -90px);
+    width: calc(100% - 90px);
+  }
+
+  .notes-title {
+    width: 120px;
   }
 }
 

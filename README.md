@@ -1,5 +1,5 @@
 # Drafty 
-A lightwight, efficient note-taking web-application buil with a focus on core JavaScript 
+A lightwight, efficient note-taking web-application built with a focus on core JavaScript 
 perfomance and responsive design.
 
 ## Purpose:

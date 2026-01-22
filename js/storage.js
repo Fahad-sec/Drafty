@@ -25,53 +25,6 @@ console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
 
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
 
-
-let nextId = notesList.length > 0 ? notesList[notesList.length -1].id + 1 : 1;
-
-function createNote(textContent, title) {
-  const note = {
-    title: title || (textContent ? textContent.substring(0, 8) + '...' : `Note${nextId}`),
-    id: nextId,
-    body: textContent
-  };
-  nextId++;
-  return note;
-};
-
-
-const saveButton = document.querySelector('.js-save-button');
-
-saveButton.addEventListener('click', () => {
-  const noteContent = document.querySelector('.js-note-pad').value;
-  const notesTitle = document.querySelector('.js-notes-title').value;
-  
-  const existingNote = notesList.find(note => note.id === Number(currentOpenNoteId));
-
-  if (existingNote) {
-     existingNote.title = notesTitle;
-     existingNote.body = noteContent;
-     
-  } else if (noteContent === '' && notesTitle === '') {
-        return;
-  }
-  
-  else {
-    const newNote = createNote(noteContent, notesTitle);
-    notesList.push(newNote);
-
-  }
-  
-  renderSideBar(notesList);
-  clearData();  
-  saveToStorage();
-  resetCurrentNoteId();
-
-
-
-});
-
-
-
 export async function fetchNotes () {
   const {data, error} = await supaBase
   .from('Notes')
@@ -87,6 +40,53 @@ export async function fetchNotes () {
     return data;
   }
 }
+
+async function saveToCloud(content, title, id) {
+  const {data, error} = await supaBase
+  .from('Notes')
+  .upsert({
+    id:  id || undefined,
+    created_at: new Date(),
+    user_id: CURRENT_USER_ID,
+    title: title  || 'no-title',
+    content: content || '',
+  })
+  .select()
+
+  if (error) {
+    console.error('Cloud error', error)
+  } else {
+    console.log('success')
+  }
+  return data[0];
+} 
+
+const saveButton = document.querySelector('.js-save-button');
+
+
+  saveButton.addEventListener('click', async () => {
+ const noteContent = document.querySelector('.js-note-pad').value;
+  const notesTitle = document.querySelector('.js-notes-title').value;
+  
+  const savedNote = await saveToCloud(noteContent, notesTitle, currentOpenNoteId)
+
+   if (savedNote) {
+    const index = notesList.findIndex(n => n.id === savedNote.id);
+    if (index !== -1) {
+      notesList[index] = savedNote;
+    } else {
+      notesList.push(savedNote)
+    }
+   } 
+  
+  renderSideBar(notesList);
+  clearData();  
+  resetCurrentNoteId();
+  renderCloud() 
+  saveToStorage();
+
+
+});
 
 
   async function renderCloud() {
@@ -109,12 +109,12 @@ function saveToStorage() {
 }
 
 
-export function displayNoteContent(id) {
-  const selectedNote = notesList.find(note => note.id === Number(id))
+export async function displayNoteContent(id) {
+  const selectedNote =   notesList.find(note => note.id === Number(id))
 
   if (selectedNote) {
     document.querySelector('.js-notes-title').value = selectedNote.title;
-    document.querySelector('.js-note-pad').value = selectedNote.body;
+    document.querySelector('.js-note-pad').value = selectedNote.content;
   }
  }
 

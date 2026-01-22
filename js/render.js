@@ -1,28 +1,36 @@
 import {displayNoteContent, deleteNote} from './storage.js'
-const sideBarElement = document.querySelector('.js-side-bar')
 
 export let currentOpenNoteId = null;
  export function resetCurrentNoteId () {
   currentOpenNoteId = null;
  }
 
+ const sideBarElement = document.querySelector('.js-side-bar');
 export function renderSideBar(data) {
-sideBarElement.innerHTML = '';
 
+  if (!data) {
+    console.error('rendersidebar received inavlid data', data);
+    return;
+  }
+
+  let html = '';
 data.forEach((note) => {
-  const html = `
-  <div class="note-item" data-note-id="${note.id}">
+  console.log(note);
+
+   html += `
+  <div class="note-item js-note-item" data-note-id="${note.id}">
   ${note.title}
   </div>
   `;
-  sideBarElement.innerHTML += html;
 })
+  sideBarElement.innerHTML = html;
+
 
 }
 
 
 sideBarElement.addEventListener('click', (event) => {
-  const noteElement = event.target.closest(`.note-item`);
+  const noteElement = event.target.closest(`.js-note-item`);
 
   if (noteElement) {
     currentOpenNoteId = noteElement.dataset.noteId;

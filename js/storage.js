@@ -1,4 +1,4 @@
-import {renderSideBar} from './render.js'
+import {renderSideBar,} from './render.js'
 import {clearData} from './buttons.js'
 import {resetCurrentNoteId, currentOpenNoteId} from './render.js'
 
@@ -7,7 +7,7 @@ const SUPABASE_URL = "https://rhppahvvdlornlezxwpp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
 
 const {createClient} = supabase;
-const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
+export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
 
 const getUID = () => {
     let uid = localStorage.getItem('drafty_v2_uid');
@@ -18,7 +18,7 @@ const getUID = () => {
     return uid;
 };
 
-const CURRENT_USER_ID = getUID();
+export const CURRENT_USER_ID = getUID();
 console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
 
 
@@ -36,7 +36,6 @@ export async function fetchNotes () {
     console.error('error loding notes', error.message)
     
   }else {
-    console.log('success', data)
     return data;
   }
 }
@@ -55,9 +54,7 @@ async function saveToCloud(content, title, id) {
 
   if (error) {
     console.error('Cloud error', error)
-  } else {
-    console.log('success')
-  }
+  } 
   return data[0];
 } 
 
@@ -81,8 +78,9 @@ const saveButton = document.querySelector('.js-save-button');
   
   renderSideBar(notesList);
   clearData();  
-  resetCurrentNoteId();
-  renderCloud() 
+  renderCloud();
+   resetCurrentNoteId();
+
   saveToStorage();
 
 
@@ -104,9 +102,10 @@ export function reloadPage () {
   window.location.reload()
 }
 
-function saveToStorage() {
+export function saveToStorage() {
   localStorage.setItem('notesList', JSON.stringify(notesList));
 }
+
 
 
 export async function displayNoteContent(id) {

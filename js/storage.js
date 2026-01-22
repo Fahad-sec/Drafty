@@ -2,6 +2,27 @@ import {renderSideBar} from './render.js'
 import {clearData} from './buttons.js'
 import {resetCurrentNoteId, currentOpenNoteId} from './render.js'
 
+
+const SUPABASE_URL = "https://rhppahvvdlornlezxwpp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
+
+const {createClient} = supabase;
+const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
+
+const getUID = () => {
+    let uid = localStorage.getItem('drafty_v2_uid');
+    if (!uid) {
+      uid = 'user_' + Math.random().toString(36).substring(2, 12);
+      localStorage.setItem('drafty_v2_uid', uid);
+    }
+    return uid;
+};
+
+const CURRENT_USER_ID = getUID();
+console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
+
+
+
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
 
 
@@ -43,12 +64,41 @@ saveButton.addEventListener('click', () => {
   renderSideBar(notesList);
   clearData();  
   saveToStorage();
-    resetCurrentNoteId();
+  resetCurrentNoteId();
 
 
 
 });
-renderSideBar(notesList)
+
+
+
+export async function fetchNotes () {
+  const {data, error} = await supaBase
+  .from('Notes')
+  .select('*')
+  .eq('user_id', CURRENT_USER_ID)
+  .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('error loding notes', error.message)
+    
+  }else {
+    console.log('success', data)
+    return data;
+  }
+}
+
+
+  async function renderCloud() {
+    const notes = await fetchNotes();
+
+    renderSideBar(notes);
+  }
+  
+
+  renderCloud() 
+
+
 
 export function reloadPage () {
   window.location.reload()

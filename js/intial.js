@@ -4,8 +4,8 @@ function sideBar() {
   const sidebar = document.querySelector('.js-side-bar');
   const sideHeader = document.querySelector('.js-side-header');
   sideHeaderButton.addEventListener('click', () => {
-    sidebar.classList.toggle('side-bar-hidden');
-    sideHeader.classList.toggle('side-header-hide');
+    sidebar.classList.toggle('side-container-hidden');
+    sideHeader.classList.toggle('side-header-hidden')
     
     if (sideHeaderButton.innerHTML === '&lt;') {
     sideHeaderButton.innerHTML = '&gt;'

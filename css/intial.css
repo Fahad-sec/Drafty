@@ -51,7 +51,9 @@ body{
   display:flex;
   gap:10px
 }
-
+.clear-button:hover {
+  background-color:#8a8989
+}
 .clear-button{
   position:static;
   width:100px;
@@ -81,6 +83,9 @@ background-color:rgb(252, 123, 123);
   cursor:pointer;
 }
 
+.save-button:hover{
+  background-color:#4ff175
+}
 .save-button{
   position:static;
   color:#ffffff;

@@ -25,17 +25,19 @@ data.forEach((note) => {
   sideBarElement.innerHTML = html;
 
 
+
 }
 
 
-sideBarElement.addEventListener('click', (event) => {
+sideBarElement.addEventListener('click',  (event) => {
   const noteElement = event.target.closest(`.js-note-item`);
 
   if (noteElement) {
     currentOpenNoteId = noteElement.dataset.noteId;
-    const id = noteElement.dataset.noteId;
       displayNoteContent(currentOpenNoteId)
 
+  } else {
+    console.log('note-item error')
   }
   
 })
@@ -54,7 +56,10 @@ deleteButton.addEventListener('click', async () => {
   if (success){
      deleteNote(currentOpenNoteId);
      resetCurrentNoteId();
-     saveToStorage();
+     displayNoteContent(currentOpenNoteId)
+     renderSideBar(notesList);
+          saveToStorage();
+
   }
 })
 

@@ -12,28 +12,32 @@ export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
 /*const getUID = () => {
     let uid = localStorage.getItem('drafty_v2_uid');
     if (!uid) {
-      uid = 'user_' + Math.random().toString(36).substring(2, 12);
+      //uid = 'user_' + Math.random().toString(36).substring(2, 12);
       localStorage.setItem('drafty_v2_uid', uid);
     }
     return uid;
 };*/
 
 
-export let CURRENT_USER_ID = null;
-//export const CURRENT_USER_ID = getUID();
-console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
-
 
 
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
+//export let CURRENT_USER_ID = null;
 
 export async function fetchNotes () {
-  const {data, error} = await supaBase
+  const {data: {user}} = await supaBase.auth.getUser();
+  if (!user) {
+    console.log('no user logged in');
+    return [];
+  }
+
+
+   const {data, error} = await supaBase
   .from('Notes')
   .select('*')
-  .eq('user_id', CURRENT_USER_ID)
+  .eq('user_id', user.id)
   .order('created_at', { ascending: false });
-
+  
   if (error) {
     console.error('error loding notes', error.message)
     
@@ -57,7 +61,7 @@ async function saveToCloud(content, title, id) {
   if (error) {
     console.error('Cloud error', error)
   } 
-  return data;
+  return data [0];
 } 
 
 const saveButton = document.querySelector('.js-save-button');
@@ -78,11 +82,9 @@ const saveButton = document.querySelector('.js-save-button');
     }
    } 
   
-  renderSideBar(notesList);
   clearData();  
   renderCloud();
-   resetCurrentNoteId();
-
+  resetCurrentNoteId();
   saveToStorage();
 
 
@@ -92,7 +94,10 @@ const saveButton = document.querySelector('.js-save-button');
   async function renderCloud() {
     const notes = await fetchNotes();
 
-    renderSideBar(notes);
+    if (notes) {
+      notesList = notes
+      renderSideBar(notesList)
+    }
   }
   
 
@@ -111,17 +116,30 @@ export function saveToStorage() {
 
 
 export async function displayNoteContent(id) {
-  const selectedNote =   notesList.find(note => note.id === Number(id))
+  console.log('start debug');
+
+
+  if (notesList.length === 0) {
+    console.log('empty-noteslist')
+  }
+
+  console.log('2. first id in notesList:', notesList[0].id, 'type:', typeof notesList[0].id)
+  const selectedNote =   notesList.find(note => String(note.id) === String(id) )
 
   if (selectedNote) {
     document.querySelector('.js-notes-title').value = selectedNote.title;
     document.querySelector('.js-note-pad').value = selectedNote.content;
+    console.log(selectedNote.title
+
+    )
+  } else {
+    console.log('selected note error')
   }
  }
 
 
 export function deleteNote(id) {
-  const index  = notesList.findIndex(note => note.id == Number(id));
+  const index  = notesList.findIndex(note => String(note.id) == String(id));
 
   if (index !== -1) {
     notesList.splice(index, 1);
@@ -159,15 +177,18 @@ document.getElementById('login-btn').addEventListener('click',async () => {
   } else {
     document.getElementById('auth-model').style.display ='none';
     location.reload;
+    renderCloud()
   }
 })
 
+export let CURRENT_USER_ID = null
+//console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
 async function intializingApp() {
   const {data: {user}}  = await supaBase.auth.getUser();
 
   if (user) {
     CURRENT_USER_ID = user.id;
-    renderCloud()
+    renderCloud();
   } else {
     document.getElementById('auth-model').style.display = 'flex';
   }

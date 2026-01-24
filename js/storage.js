@@ -9,16 +9,18 @@ const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
 const {createClient} = supabase;
 export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
 
-const getUID = () => {
+/*const getUID = () => {
     let uid = localStorage.getItem('drafty_v2_uid');
     if (!uid) {
       uid = 'user_' + Math.random().toString(36).substring(2, 12);
       localStorage.setItem('drafty_v2_uid', uid);
     }
     return uid;
-};
+};*/
 
-export const CURRENT_USER_ID = getUID();
+
+export let CURRENT_USER_ID = null;
+//export const CURRENT_USER_ID = getUID();
 console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
 
 
@@ -55,7 +57,7 @@ async function saveToCloud(content, title, id) {
   if (error) {
     console.error('Cloud error', error)
   } 
-  return data[0];
+  return data;
 } 
 
 const saveButton = document.querySelector('.js-save-button');
@@ -129,3 +131,46 @@ export function deleteNote(id) {
     resetCurrentNoteId();
   }
 }
+
+
+document.getElementById('signup-btn').addEventListener('click', async() => {
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+
+  const {data, error} = await supaBase.auth.signUp({email, password});
+  if (error) {
+    document.getElementById('auth-error').innerText = error.message;
+  }else {
+    alert('Check your email for a confirmation link!')
+  }
+});
+
+document.getElementById('login-btn').addEventListener('click',async () => {
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+
+  const {data, error} = await supaBase.auth.signInWithPassword({
+    email, password
+  });
+
+  if (error) {
+    document.getElementById('auth-error').innerText = error.message;
+
+  } else {
+    document.getElementById('auth-model').style.display ='none';
+    location.reload;
+  }
+})
+
+async function intializingApp() {
+  const {data: {user}}  = await supaBase.auth.getUser();
+
+  if (user) {
+    CURRENT_USER_ID = user.id;
+    renderCloud()
+  } else {
+    document.getElementById('auth-model').style.display = 'flex';
+  }
+}
+
+intializingApp();

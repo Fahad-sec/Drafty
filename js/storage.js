@@ -18,6 +18,20 @@ export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
     return uid;
 };*/
 
+export let CURRENT_USER_ID = null
+//console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
+async function intializingApp() {
+  const {data: {user}}  = await supaBase.auth.getUser();
+
+  if (user) {
+    CURRENT_USER_ID = user.id;
+    renderCloud();
+  } else {
+    document.getElementById('auth-model').style.display = 'flex';
+  }
+}
+
+intializingApp();
 
 
 
@@ -181,17 +195,3 @@ document.getElementById('login-btn').addEventListener('click',async () => {
   }
 })
 
-export let CURRENT_USER_ID = null
-//console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
-async function intializingApp() {
-  const {data: {user}}  = await supaBase.auth.getUser();
-
-  if (user) {
-    CURRENT_USER_ID = user.id;
-    renderCloud();
-  } else {
-    document.getElementById('auth-model').style.display = 'flex';
-  }
-}
-
-intializingApp();

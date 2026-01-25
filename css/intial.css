@@ -6,8 +6,12 @@ body{
 
 }
 
+.main-overlay{
+  display:none;
+}
+
 .auth-overlay{
-    display:flex;
+    display:none;
     justify-content:center;
     align-items:center
 }

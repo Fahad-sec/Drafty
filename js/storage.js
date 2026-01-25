@@ -9,19 +9,10 @@ const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
 const {createClient} = supabase;
 export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
 
-/*const getUID = () => {
-    let uid = localStorage.getItem('drafty_v2_uid');
-    if (!uid) {
-      //uid = 'user_' + Math.random().toString(36).substring(2, 12);
-      localStorage.setItem('drafty_v2_uid', uid);
-    }
-    return uid;
-};*/
-
 export let CURRENT_USER_ID = null
-//console.log("drafty v2 intiliazing for user", CURRENT_USER_ID);
 async function intializingApp() {
   const {data: {user}}  = await supaBase.auth.getUser();
+
 
   if (user) {
     CURRENT_USER_ID = user.id;
@@ -33,10 +24,7 @@ async function intializingApp() {
 
 intializingApp();
 
-
-
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
-//export let CURRENT_USER_ID = null;
 
 export async function fetchNotes () {
   const {data: {user}} = await supaBase.auth.getUser();
@@ -105,7 +93,7 @@ const saveButton = document.querySelector('.js-save-button');
 });
 
 
-  async function renderCloud() {
+  export async function renderCloud() {
     const notes = await fetchNotes();
 
     if (notes) {
@@ -113,11 +101,7 @@ const saveButton = document.querySelector('.js-save-button');
       renderSideBar(notesList)
     }
   }
-  
-
   renderCloud() 
-
-
 
 export function reloadPage () {
   window.location.reload()
@@ -189,9 +173,25 @@ document.getElementById('login-btn').addEventListener('click',async () => {
     document.getElementById('auth-error').innerText = error.message;
 
   } else {
-    document.getElementById('auth-model').style.display ='none';
+    document.getElementById('auth-modal').style.display ='none';
+    document.getElementById('main-app').style.display = 'flex';
     location.reload;
     renderCloud()
+  }
+})
+
+
+supaBase.auth.onAuthStateChange((event, session) => {
+  const authModal = document.getElementById('auth-modal');
+  const mainApp = document.getElementById('main-app');
+  if (session && session.user) {
+    CURRENT_USER_ID = session.user.id;
+    mainApp.style.display = 'flex';
+    authModal.style.display = 'none';
+    renderCloud();
+  } else {
+    authModal.style.display ='flex';
+    mainApp.style.display ='none';
   }
 })
 

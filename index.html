@@ -16,8 +16,9 @@
 
         </div>
         </div>
-
-        <div id="auth-model" class="auth-overlay">
+   
+        
+        <div id="auth-modal" class="auth-overlay">
           <div class="auth-container">
             <h2>Drafty-login</h2>
             <input type="email" id="auth-email" placeholder="Email">
@@ -27,6 +28,7 @@
           </div>
             <p id="auth-error" style="color:red;"></p>
         </div>
+        <div id="main-app" class="main-overlay">
         <div class="side-container">
           <div class="side-header js-side-header">
           My Notes
@@ -50,12 +52,12 @@
           <div class="notepads-control-bottom">
              <button class="delete-button js-delete-button">Delete</button>
           </div>
-          
-          
         </main>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script src="js/intial.js" type="module"></script>
         <script src="js/storage.js" type="module"></script>
+        <script src="js/auth.js" type="module"></script>
         <script src="js/buttons.js" type="module"></script>
       </body>
   </html>

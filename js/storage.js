@@ -18,7 +18,7 @@ async function intializingApp() {
     CURRENT_USER_ID = user.id;
     renderCloud();
   } else {
-    document.getElementById('auth-model').style.display = 'flex';
+    document.getElementById('auth-modal').style.display = 'flex';
   }
 }
 

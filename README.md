@@ -1,19 +1,28 @@
 # Drafty 
-A lightwight, efficient note-taking web-application built with a focus on core JavaScript 
-perfomance and responsive design.
+A lightwight, cloud-synced note-taking application built with Vanilla JavaScript and Supabase.
+
+Drafty evolved from a 6-day sprint using DOM manipulation into a full-stack Single-page-application using secure user authentication and real-time persistence.
 
 ## Purpose:
-I developed Drafty as a 6 day sprint to solidify my understanding of the Document Object Model and state management. My goal was to build a fully functional Single-Page-Application using only vanilla JavaScript.
-
+I developed Drafty to solidify my understanding of state management, asynchronous JavaScript, and the integration of third-party BaaS providers. It represents a way of building modern and secure software without the weight of heavy frameworks.
 ## Technicals:
-- Frontend: HTML, CSS3, Vanilla JavaScript.
-- Persistence: localStorage API  for Client-side data storage.
-- Deployment: Automated CI/CD pipline using Git and Vercel for real-time updates
+- Frontend: HTML5, CSS3, Vanilla JavaScript (ES6+).
+- BaaS: Supabase's Database and Authentication
+- Deployment: Automated CI/CD pipline using Git and Vercel.
 
 ## Features v1.0.0:
+- Secure Auth: Dedicated Login/Signup interface with session persistence.
+- Cloud Storage: Notes are synced to the cloud via Supabase Auth making user's notes available across devices.
 - Complete CRUD Lifecycle: Create, Delete, Update and delete effortlessly.
-- Smart Save Logic: Save button distinguishes between creating new entries and updating existing one via unique id matching.
-- Persistent Storage: Notes remain in the browser's Storage, surviving reloads and closing of the browser.
+- Smart Save Logic: Intelligent ID matching that distinguishes between new entries and edits to existing notes.
 - Automatic-Titling: Titles are generated automatically if the note's title is left blank.
-- UI: Single-Page-Interface: updates the sidebar and editor using DOM manipulation without page reloads.
 - Responsive Sidebar: Collapsible sidebar for a clean interface.
+- UUID: Database indexing using unique identifiers for every note.
+
+## Evolution:
+Originally built to learn browser's localStorage and DOM manipulation, the latest version represents a complete infrastructure: 
+
+- Cloud Storage: Moved from localStorage to a PostgreSQL database via Supabase.
+- User and security: Integrated Supabase Auth, enabling private user accounts and data.
+
+- Session Management: Implemented persistent session management, ensuring users stay logged in across page reloads and browser closing.

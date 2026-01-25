@@ -71,7 +71,8 @@ const saveButton = document.querySelector('.js-save-button');
 
   saveButton.addEventListener('click', async () => {
  const noteContent = document.querySelector('.js-note-pad').value;
-  const notesTitle = document.querySelector('.js-notes-title').value;
+  const notesTitleInput = document.querySelector('.js-notes-title').value;
+  const notesTitle = notesTitleInput || noteContent.substring(0, 20);
   
   const savedNote = await saveToCloud(noteContent, notesTitle, currentOpenNoteId)
 

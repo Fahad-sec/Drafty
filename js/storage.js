@@ -68,12 +68,11 @@ async function saveToCloud(content, title, id) {
 
 const saveButton = document.querySelector('.js-save-button');
 
-
   saveButton.addEventListener('click', async () => {
  const noteContent = document.querySelector('.js-note-pad').value;
   const notesTitleInput = document.querySelector('.js-notes-title').value;
   const notesTitle = notesTitleInput || noteContent.substring(0, 20);
-  
+
   const savedNote = await saveToCloud(noteContent, notesTitle, currentOpenNoteId)
 
    if (savedNote) {
@@ -115,22 +114,16 @@ export function saveToStorage() {
 
 
 export async function displayNoteContent(id) {
-  console.log('start debug');
 
 
   if (notesList.length === 0) {
-    console.log('empty-noteslist')
   }
 
-  console.log('2. first id in notesList:', notesList[0].id, 'type:', typeof notesList[0].id)
   const selectedNote =   notesList.find(note => String(note.id) === String(id) )
 
   if (selectedNote) {
     document.querySelector('.js-notes-title').value = selectedNote.title;
     document.querySelector('.js-note-pad').value = selectedNote.content;
-    console.log(selectedNote.title
-
-    )
   } else {
     console.log('selected note error')
   }

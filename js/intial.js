@@ -1,12 +1,10 @@
 
 function sideBar() {
   const sideHeaderButton = document.querySelector('.js-side-header-button');
-  const sidebar = document.querySelector('.js-side-bar');
-  const sideHeader = document.querySelector('.js-side-header');
+  
   sideHeaderButton.addEventListener('click', () => {
-    sidebar.classList.toggle('side-container-hidden');
-    sideHeader.classList.toggle('side-header-hidden')
-    
+
+    sideBarClose()
     if (sideHeaderButton.innerHTML === '&lt;') {
     sideHeaderButton.innerHTML = '&gt;'
     } else {
@@ -24,3 +22,19 @@ function reloadPage() {
 
 reloadPage();
 sideBar();
+
+
+export function sideBarClose() {
+    const sidebar = document.querySelector('.js-side-bar');
+  const sideHeader = document.querySelector('.js-side-header');
+   sidebar.classList.toggle('side-container-hidden');
+    sideHeader.classList.toggle('side-header-hidden');
+}
+
+sideBarClose()
+
+export function sideBarOpen() {
+  const sidebar = document.querySelector('.js-side-bar');
+  const sideHeader = document.querySelector('.js-side-header');   sidebar.classList.remove('side-container-hidden');
+  sideHeader.classList.remove('side-header-hidden');
+}

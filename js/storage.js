@@ -1,5 +1,6 @@
 import {renderSideBar,} from './render.js'
-import {clearData} from './buttons.js'
+import {clearData,} from './buttons.js'
+import {sideBarOpen} from './intial.js'
 import {resetCurrentNoteId, currentOpenNoteId} from './render.js'
 
 
@@ -88,6 +89,7 @@ const saveButton = document.querySelector('.js-save-button');
   renderCloud();
   resetCurrentNoteId();
   saveToStorage();
+  sideBarOpen();
 
 
 });

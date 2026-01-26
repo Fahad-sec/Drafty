@@ -15,6 +15,7 @@ I developed Drafty to solidify my understanding of state management, asynchronou
 - Cloud Storage: Notes are synced to the cloud via Supabase Auth making user's notes available across devices.
 - Complete CRUD Lifecycle: Create, Delete, Update and delete effortlessly.
 - Smart Save Logic: Intelligent ID matching that distinguishes between new entries and edits to existing notes.
+- Edit notes: User can edit a note after enabling the editor mode using the Edit button and clicking the button again saves or updates the note. While not enabling the edit mode inhibits you from accidently editing the note.
 - Automatic-Titling: Titles are generated automatically if the note's title is left blank.
 - Responsive Sidebar: Collapsible sidebar for a clean interface.
 - UUID: Database indexing using unique identifiers for every note.

@@ -12,3 +12,4 @@ export function clearData() {
   document.querySelector('.js-notes-title').value = '';
   resetCurrentNoteId();
 }
+

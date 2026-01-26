@@ -10,7 +10,7 @@ I developed Drafty to solidify my understanding of state management, asynchronou
 - BaaS: Supabase's Database and Authentication
 - Deployment: Automated CI/CD pipline using Git and Vercel.
 
-## Features v1.0.0:
+## Features :
 - Secure Auth: Dedicated Login/Signup interface with session persistence.
 - Cloud Storage: Notes are synced to the cloud via Supabase Auth making user's notes available across devices.
 - Complete CRUD Lifecycle: Create, Delete, Update and delete effortlessly.

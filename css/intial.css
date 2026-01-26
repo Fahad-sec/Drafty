@@ -146,6 +146,21 @@ background-color:rgb(252, 123, 123);
   cursor:pointer;
 }
 
+.logout-btn {
+  position:static;
+  color:#ffffff;
+  font-size:15px;
+  font-family: inherit;
+  background-color:#5d94e7;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  width:100px;
+  height: 35px;
+  margin-left: none;
+  cursor:pointer;
+
+}
+
 .save-button:hover{
   background-color:#4ff175
 }
@@ -318,11 +333,15 @@ background-color:rgb(252, 123, 123);
   }
   .content-container {
     margin-left: 0 !important;
-    margin-top: 100px;
+    margin-top: 0px;
     padding: 10px;
     width: 100% !important;
     box-sizing:border-box;
 
+  }
+
+  .logout-btn {
+    margin-bottom:100px;
   }
   .notepads-controls-top{
     flex-direction: column;

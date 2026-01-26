@@ -189,3 +189,12 @@ supaBase.auth.onAuthStateChange((event, session) => {
   }
 })
 
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  const {error} = await supaBase.auth.signOut();
+
+  if (error) {
+    alert('Logout failed. Check your internet connection')
+  } else {
+    location.reload();
+  }
+})

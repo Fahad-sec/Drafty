@@ -1,5 +1,5 @@
 import {resetCurrentNoteId} from './render.js'
-
+import {saveButtonEdit} from './storage.js'
 
 const clearButton = document.querySelector('.js-clear-button');
 
@@ -31,7 +31,9 @@ editBtn.addEventListener('click', () => {
 
   } else {
     resetEditor();
+    saveButtonEdit();
   }
+
 })
 
 export function resetEditor() {

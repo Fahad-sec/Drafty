@@ -67,10 +67,17 @@ async function saveToCloud(content, title, id) {
   return data [0];
 } 
 
- const saveButton = document.querySelector('.js-save-button');
+
+  const saveButton = document.querySelector('.js-save-button');
 
   saveButton.addEventListener('click', async () => {
- const noteContent = document.querySelector('.js-note-pad').value;
+   saveButtonEdit()
+
+});
+
+export async function saveButtonEdit() {
+
+  const noteContent = document.querySelector('.js-note-pad').value;
   const notesTitleInput = document.querySelector('.js-notes-title').value;
   const notesTitle = notesTitleInput || noteContent.substring(0, 20);
 
@@ -91,8 +98,7 @@ async function saveToCloud(content, title, id) {
   saveToStorage();
   sideBarOpen();
 
-
-});
+}
 
 
   export async function renderCloud() {

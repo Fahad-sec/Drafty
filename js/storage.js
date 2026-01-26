@@ -67,7 +67,7 @@ async function saveToCloud(content, title, id) {
   return data [0];
 } 
 
-const saveButton = document.querySelector('.js-save-button');
+ const saveButton = document.querySelector('.js-save-button');
 
   saveButton.addEventListener('click', async () => {
  const noteContent = document.querySelector('.js-note-pad').value;

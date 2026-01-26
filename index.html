@@ -43,14 +43,15 @@
         <main class="content-container">
           <div class="notepads-controls-top">
             <button class="logout-btn" id="logout-btn">Logout</button>
-            <input placeholder="Title" class="notes-title js-notes-title">
+            <input placeholder="Title" class="notes-title js-notes-title" readonly>
             <div class="button-group">
               <button class="clear-button js-clear-button">Clear</button>
+              <button class="edit-btn">Edit</button>
               <button class="save-button js-save-button">Save</button>
            </div>
           </div>
 
-          <textarea class="note-pad js-note-pad" placeholder="Start typing your notes...."></textarea>
+          <textarea class="note-pad js-note-pad" placeholder="Start typing your notes...." readonly></textarea>
           
           <div class="notepads-control-bottom">
              <button class="delete-button js-delete-button">Delete</button>

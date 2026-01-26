@@ -13,3 +13,31 @@ export function clearData() {
   resetCurrentNoteId();
 }
 
+const editBtn =  document.querySelector('.edit-btn');
+const titleInput = document.querySelector('.js-notes-title');
+const contentInput = document.querySelector('.js-note-pad');
+
+let isEditing = false;
+
+editBtn.addEventListener('click', () => {
+  isEditing = !isEditing;
+
+  if (isEditing) {
+    titleInput.readOnly = false;
+    contentInput.readOnly = false;
+    editBtn.textContent = 'Close Editor';
+    editBtn.style.backgroundColor = 'red';
+    contentInput.focus();
+
+  } else {
+    resetEditor();
+  }
+})
+
+export function resetEditor() {
+  
+    titleInput.readOnly = true;
+    contentInput.readOnly = true;
+    editBtn.textContent = 'Edit Note';
+    editBtn.style.backgroundColor = ''
+}

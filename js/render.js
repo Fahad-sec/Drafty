@@ -1,5 +1,7 @@
 import {displayNoteContent, deleteNote} from './storage.js'
 import {supaBase, CURRENT_USER_ID, saveToStorage} from './storage.js';
+import {resetEditor} from './buttons.js'
+
 export let currentOpenNoteId = null;
  export function resetCurrentNoteId () {
   currentOpenNoteId = null;
@@ -34,7 +36,9 @@ sideBarElement.addEventListener('click',  (event) => {
 
   if (noteElement) {
     currentOpenNoteId = noteElement.dataset.noteId;
-      displayNoteContent(currentOpenNoteId)
+      displayNoteContent(currentOpenNoteId);
+      
+      resetEditor()
 
   } else {
     console.log('note-item error')
@@ -58,7 +62,7 @@ deleteButton.addEventListener('click', async () => {
      resetCurrentNoteId();
      displayNoteContent(currentOpenNoteId)
      renderSideBar(notesList);
-          saveToStorage();
+     saveToStorage();
 
   }
 })

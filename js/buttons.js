@@ -1,7 +1,11 @@
+
+
 export function buttonListener(resetCurrentNoteId) {
   const clearButton = document.querySelector('.js-clear-button');
   const notePad = document.querySelector('.js-note-pad');
   const title = document.querySelector('.js-notes-title');
+
+
   clearButton?.addEventListener('click', () => {
 
  clearData(notePad, title, resetCurrentNoteId);

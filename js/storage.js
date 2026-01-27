@@ -77,8 +77,13 @@ async function saveToCloud(content, title, id) {
 
 export async function saveButtonEdit() {
 
-  const noteContent = document.querySelector('.js-note-pad').value;
-  const notesTitleInput = document.querySelector('.js-notes-title').value;
+  const noteContentElement = document.querySelector('.js-note-pad')
+  const noteContent = noteContentElement.value;
+
+
+  const noteTitleElement = document.querySelector('.js-notes-title');
+  const notesTitleInput = noteTitleElement.value;
+
   const notesTitle = notesTitleInput || noteContent.substring(0, 20);
 
   const savedNote = await saveToCloud(noteContent, notesTitle, currentOpenNoteId)
@@ -92,7 +97,7 @@ export async function saveButtonEdit() {
     }
    } 
   
-  clearData();  
+  clearData( noteContentElement, noteTitleElement);  
   renderCloud();
   resetCurrentNoteId();
   saveToStorage();

@@ -1,39 +1,49 @@
-
 import {clearData} from '../../js/buttons.js'
-window.resetCurrentNoteId = jasmine.createSpy('resetCurrentNoteId')
+window.resetCurrentNoteId = jasmine.createSpy('resetCurrentNoteId');
+
+window.saveButtonEdit = jasmine.createSpy('saveButtonEdit')
 
 describe('test suite: buttons', () => {
 
+afterEach(() => {
+  document.getElementById('test-clear-input-container').innerHTML = '';
+})
+
 beforeEach(() => {
-  document.body.innerHTML= `
+  document.getElementById('test-clear-input-container').innerHTML= `
   <input placeholder="Title" class="notes-title js-notes-title" >
   <textarea class="note-pad js-note-pad" placeholder="Start typing your notes...." readonly></textarea>
 
   <button class="clear-button js-clear-button">Clear</button>
   `
-  const clearButton = 
+  
+
+   const title = document.querySelector('.js-notes-title')
+   const notePad = document.querySelector('.js-note-pad');
+
+   title.value = 'this is the title';
+   notePad.value =  'this is the content of the note'
+
+   const clearButton = 
   document.querySelector('.js-clear-button')
   
   clearButton.addEventListener('click', () => {
-  clearData()
+  clearData(notePad, title)
 
   })
 
-  spyOn(localStorage, 'setItem');
-
-   document.querySelector('.js-notes-title').value = 'this is a note title';
-   document.querySelector('.js-note-pad').value = 'this is the note content'
 });
 
 
 
 
   it('clears input', () => {
-    document.querySelector('.js-clear-button').click();
+    document.querySelector('.js-clear-button').click(); 
+    console.log('test worked');
 
     expect( 
-      document.querySelector('.js-notes-title').value.length
-    ).toEqual(0)
+      document.querySelector('.js-notes-title').value
+    ).toBe('')
   })
 
 })

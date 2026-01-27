@@ -97,7 +97,6 @@ export async function saveButtonEdit() {
   resetCurrentNoteId();
   saveToStorage();
   sideBarOpen();
-
 }
 
 

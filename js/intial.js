@@ -1,5 +1,5 @@
 
-function sideBar() {
+export function sideBar(sideBarClose) {
   const sideHeaderButton = document.querySelector('.js-side-header-button');
   
   sideHeaderButton?.addEventListener('click', () => {
@@ -13,7 +13,7 @@ function sideBar() {
   })
 };
 
-function reloadPage() {
+export function reloadPage() {
   const draftyHeader = document.querySelector('.js-logo-img');
   draftyHeader?.addEventListener('click', () => {
     window.location.reload();
@@ -23,7 +23,7 @@ function reloadPage() {
 
 
 export function sideBarClose() {
-    const sidebar = document.querySelector('.js-side-bar');
+  const sidebar = document.querySelector('.js-side-bar');
   const sideHeader = document.querySelector('.js-side-header');
    sidebar.classList.toggle('side-container-hidden');
     sideHeader.classList.toggle('side-header-hidden');
@@ -37,9 +37,4 @@ export function sideBarOpen() {
   sideHeader.classList.remove('side-header-hidden');
 }
 
-export function globalFunctions () {
-  reloadPage();
-  sideBar();
-  sideBarClose();
-}
 

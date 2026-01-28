@@ -84,7 +84,12 @@ export async function saveButtonEdit() {
   const noteTitleElement = document.querySelector('.js-notes-title');
   const notesTitleInput = noteTitleElement.value;
 
+  if (noteContent === '' && notesTitleInput === '') {
+    return ;
+  }
   const notesTitle = notesTitleInput || noteContent.substring(0, 20);
+
+  
 
   const savedNote = await saveToCloud(noteContent, notesTitle, currentOpenNoteId)
 

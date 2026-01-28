@@ -1,26 +1,27 @@
 
 
-export function buttonListener(resetCurrentNoteId) {
+export function buttonListener() {
   const clearButton = document.querySelector('.js-clear-button');
-  const notePad = document.querySelector('.js-note-pad');
-  const title = document.querySelector('.js-notes-title');
+
 
 
   clearButton?.addEventListener('click', () => {
 
- clearData(notePad, title, resetCurrentNoteId);
+ clearData();
 })
 
 }
 
 
-export function clearData(notePad, title, resetCurrentNoteId) {
+export function clearData(id) {
+    const notePad = document.querySelector('.js-note-pad');
+  const title = document.querySelector('.js-notes-title');
   if (notePad) notePad.value = '';
   if(title) title.value = '';
   
-  if ( resetCurrentNoteId ) { 
-  resetCurrentNoteId();
-}}
+ 
+  id = null
+}
 
 
 export function editButtonListener(saveButtonEdit) {
@@ -42,16 +43,19 @@ export function editButtonListener(saveButtonEdit) {
 
       } else {
         resetEditor(editBtn, titleInput, contentInput);
-        saveButtonEdit();
+        //saveButtonEdit();
       }
 
       })
 }
 
-export function resetEditor(btn, title, content) {
+export function resetEditor() {
+      const editBtn =  document.querySelector('.edit-btn');
+      const titleInput = document.querySelector('.js-notes-title');
+      const contentInput = document.querySelector('.js-note-pad');
   
-    title.readOnly = true;
-    content.readOnly = true;
-    btn.textContent = 'Edit Note';
-    btn.style.backgroundColor = ''
+    titleInput.readOnly = true;
+    contentInput.readOnly = true;
+    editBtn.textContent = 'Edit Note';
+    editBtn.style.backgroundColor = ''
 }

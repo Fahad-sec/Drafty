@@ -1,9 +1,3 @@
-import {renderSideBar,} from './render.js'
-import {clearData,} from './buttons.js'
-import {sideBarOpen} from './intial.js'
-import {resetCurrentNoteId, currentOpenNoteId} from './render.js'
-
-
 const SUPABASE_URL = "https://rhppahvvdlornlezxwpp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
 
@@ -11,19 +5,20 @@ const {createClient} = supabase;
 export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
 
 export let CURRENT_USER_ID = null
-async function intializingApp() {
+
+
+export async function initializingApp(renderSideBar) {
   const {data: {user}}  = await supaBase.auth.getUser();
 
 
   if (user) {
     CURRENT_USER_ID = user.id;
-    renderCloud();
+    renderCloud(renderSideBar);
   } else {
     document.getElementById('auth-modal').style.display = 'flex';
   }
 }
 
-intializingApp();
 
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
 
@@ -68,21 +63,16 @@ async function saveToCloud(content, title, id) {
 } 
 
 
-  const saveButton = document.querySelector('.js-save-button');
 
-  saveButton.addEventListener('click', async () => {
-   saveButtonEdit()
 
-});
-
-export async function saveButtonEdit() {
+export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideBarOpenFn, clearDataFn}) {
 
   const noteContentElement = document.querySelector('.js-note-pad')
   const noteContent = noteContentElement.value;
-
-
   const noteTitleElement = document.querySelector('.js-notes-title');
   const notesTitleInput = noteTitleElement.value;
+
+  const currentId = getCurrentId()
 
   if (noteContent === '' && notesTitleInput === '') {
     return ;
@@ -91,7 +81,7 @@ export async function saveButtonEdit() {
 
   
 
-  const savedNote = await saveToCloud(noteContent, notesTitle, currentOpenNoteId)
+  const savedNote = await saveToCloud(noteContent, notesTitle, currentId)
 
    if (savedNote) {
     const index = notesList.findIndex(n => n.id === savedNote.id);
@@ -101,24 +91,22 @@ export async function saveButtonEdit() {
       notesList.push(savedNote)
     }
    } 
-  
-  clearData( noteContentElement, noteTitleElement);  
-  renderCloud();
-  resetCurrentNoteId();
+  setCurrentId(null);
+  clearDataFn();  
+  renderFn(notesList);
   saveToStorage();
-  sideBarOpen();
+  sideBarOpenFn();
 }
 
 
-  export async function renderCloud() {
+  export async function renderCloud(renderSideBar) {
     const notes = await fetchNotes();
 
     if (notes) {
       notesList = notes
       renderSideBar(notesList)
     }
-  }
-  renderCloud() 
+  } 
 
 export function reloadPage () {
   window.location.reload()
@@ -152,12 +140,42 @@ export function deleteNote(id) {
 
   if (index !== -1) {
     notesList.splice(index, 1);
+   // resetCurrentNoteId();
     saveToStorage();
-    clearData();
-    renderSideBar(notesList);
-    resetCurrentNoteId();
+    return true;
+
   }
+  return false;
 }
+
+
+
+
+export function setupAuthListeners(renderSideBar) {
+
+supaBase.auth.onAuthStateChange((event, session) => {
+  const authModal = document.getElementById('auth-modal');
+  const mainApp = document.getElementById('main-app');
+  if (session && session.user) {
+    CURRENT_USER_ID = session.user.id;
+    mainApp.style.display = 'flex';
+    authModal.style.display = 'none';
+    renderCloud(renderSideBar);
+  } else {
+    authModal.style.display ='flex';
+    mainApp.style.display ='none';
+  }
+})
+
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  const {error} = await supaBase.auth.signOut();
+
+  if (error) {
+    alert('Logout failed. Check your internet connection')
+  } else {
+    location.reload();
+  }
+})
 
 
 document.getElementById('signup-btn').addEventListener('click', async() => {
@@ -186,32 +204,21 @@ document.getElementById('login-btn').addEventListener('click',async () => {
   } else {
     document.getElementById('auth-modal').style.display ='none';
     document.getElementById('main-app').style.display = 'flex';
-    location.reload;
-    renderCloud()
+    renderCloud(renderSideBar)
   }
 })
+}
 
-
-supaBase.auth.onAuthStateChange((event, session) => {
-  const authModal = document.getElementById('auth-modal');
-  const mainApp = document.getElementById('main-app');
-  if (session && session.user) {
-    CURRENT_USER_ID = session.user.id;
-    mainApp.style.display = 'flex';
-    authModal.style.display = 'none';
-    renderCloud();
-  } else {
-    authModal.style.display ='flex';
-    mainApp.style.display ='none';
-  }
-})
-
-document.getElementById('logout-btn').addEventListener('click', async () => {
-  const {error} = await supaBase.auth.signOut();
-
+export async function deleteFromCloud (noteId) {
+  const {error} = await supaBase
+  .from('Notes')
+  .delete()
+  .eq('id', noteId)
+  .eq('user_id', CURRENT_USER_ID);
   if (error) {
-    alert('Logout failed. Check your internet connection')
+    console.log(error);
+    return false;
   } else {
-    location.reload();
+    return true;
   }
-})
+}

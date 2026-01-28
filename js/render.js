@@ -84,7 +84,7 @@ export  function deleteButton({
             deleteNote(currentId);
             setCurrentId(null);
             clearData(setCurrentId)
-            displayNoteContent(currentId);
+           // displayNoteContent(currentId);
             renderSideBar(getNotes());
 
             saveToStorage();

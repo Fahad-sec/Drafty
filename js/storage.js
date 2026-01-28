@@ -108,9 +108,6 @@ export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideB
     }
   } 
 
-export function reloadPage () {
-  window.location.reload()
-}
 
 export function saveToStorage() {
   localStorage.setItem('notesList', JSON.stringify(notesList));

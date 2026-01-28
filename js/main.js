@@ -1,5 +1,5 @@
 import {buttonListener, editButtonListener, resetEditor, clearData} from './buttons.js'
-import { sideBarClose, sideBar, sideBarOpen} from './intial.js'
+import { sideBarClose, sideBar, sideBarOpen, reloadPage} from './intial.js'
 import {saveButtonEdit, deleteFromCloud, notesList, deleteNote, displayNoteContent, saveToStorage,  initializingApp, setupAuthListeners} from './storage.js'
 
 import { setupNoteItems} from './render.js';
@@ -44,3 +44,5 @@ deleteButton({
   })
   
 setupAuthListeners(renderSideBar)
+
+reloadPage();

@@ -49,6 +49,12 @@ beforeEach(() => {
 
 
 describe('test suit: edit-button',() => {
+
+  afterEach(() => {
+    document.querySelector('#test-clear-input-container').innerHTML = '';
+  })
+
+  
   let saveSpy;
   beforeEach(() => {
     document.querySelector('#test-clear-input-container').innerHTML = `

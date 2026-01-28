@@ -32,7 +32,8 @@ export function sideBarClose() {
 
 export function sideBarOpen() {
   const sidebar = document.querySelector('.js-side-bar');
-  const sideHeader = document.querySelector('.js-side-header');   sidebar.classList.remove('side-container-hidden');
+  const sideHeader = document.querySelector('.js-side-header'); 
+  sidebar.classList.remove('side-container-hidden');
   sideHeader.classList.remove('side-header-hidden');
 }
 
@@ -42,6 +43,3 @@ export function globalFunctions () {
   sideBarClose();
 }
 
-if (!window.jasmine) {
-  globalFunctions();
-}

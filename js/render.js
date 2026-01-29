@@ -3,8 +3,8 @@ export let currentOpenNoteId = null;
   currentOpenNoteId = null;
  
 
- const sideBarElement = document.querySelector('.js-side-bar');
 export function renderSideBar(data) {
+ const sideBarElement = document.querySelector('.js-side-bar');
 
   if (!data) {
     console.error('rendersidebar received inavlid data', data);

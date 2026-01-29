@@ -137,7 +137,6 @@ export function deleteNote(id) {
 
   if (index !== -1) {
     notesList.splice(index, 1);
-   // resetCurrentNoteId();
     saveToStorage();
     return true;
 

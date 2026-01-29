@@ -1,6 +1,6 @@
 
 export let currentOpenNoteId = null;
-  currentOpenNoteId = null;
+//  currentOpenNoteId = null;
  
 
 export function renderSideBar(data) {
@@ -36,6 +36,8 @@ export function setCurrentId(id) {
 }
 
 export function setupNoteItems(displayNoteContent, sideBarClose, resetEditor) {
+ const sideBarElement = document.querySelector('.js-side-bar');
+
 sideBarElement.addEventListener('click',  (event) => {
   const noteElement = event.target.closest(`.js-note-item`);
 
@@ -74,7 +76,7 @@ export  function deleteButton({
           
         const  currentId = getCurrentId()
           if (!currentId) {
-            alert('select a note to delete first')
+            alert('Please select a note to delete first')
             return;
           } 
           

@@ -1,12 +1,12 @@
 
 
-export function buttonListener() {
+export function buttonListener(setCurrentId) {
   const clearButton = document.querySelector('.js-clear-button');
 
 
 
   clearButton?.addEventListener('click', () => {
-
+ setCurrentId(null)
  clearData();
 })
 
@@ -24,7 +24,7 @@ export function clearData(id) {
 }
 
 
-export function editButtonListener(saveButtonEdit) {
+export function editButtonListener() {
       const editBtn =  document.querySelector('.edit-btn');
       const titleInput = document.querySelector('.js-notes-title');
       const contentInput = document.querySelector('.js-note-pad');

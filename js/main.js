@@ -11,7 +11,7 @@ initializingApp(renderSideBar);
 
 
 
-buttonListener();
+buttonListener(setCurrentId);
 editButtonListener();
 sideBar(sideBarClose);
 

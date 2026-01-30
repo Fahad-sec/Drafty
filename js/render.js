@@ -66,6 +66,7 @@ export  function deleteButton({
   getNotes,
   clearData,
   saveToStorage,
+  supaBase,
 
 })
 
@@ -80,7 +81,7 @@ export  function deleteButton({
             return;
           } 
           
-          const success = await deleteFromCloud(currentId);
+          const success = await deleteFromCloud(currentId, supaBase);
 
           if (success){
             deleteNote(currentId);

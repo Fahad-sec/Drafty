@@ -87,7 +87,8 @@ let
   renderSideBarSpy,
   getNotesSpy,
   clearDataSpy,
-  saveToStorageSpy;
+  saveToStorageSpy,
+  supaBaseSpy;
 
 
    afterEach(() => {
@@ -120,7 +121,8 @@ let
           renderSideBar: renderSideBarSpy,
           getNotes: getNotesSpy,
           saveToStorage: saveToStorageSpy,
-          clearData: clearDataSpy
+          clearData: clearDataSpy,
+          supaBase: supaBaseSpy
       })
    })
 
@@ -131,7 +133,7 @@ let
 
          expect(getCurrentIdSpy).toHaveBeenCalled();
          expect(setCurrentIdSpy).toHaveBeenCalledWith(null);
-         expect(deleteFromCloudSpy).toHaveBeenCalledWith('123');
+         expect(deleteFromCloudSpy).toHaveBeenCalledWith('123',supaBaseSpy );
          expect(deleteNoteSpy).toHaveBeenCalledWith('123');
          expect(renderSideBarSpy).toHaveBeenCalledWith([]);
          expect(saveToStorageSpy).toHaveBeenCalled();
@@ -157,7 +159,7 @@ let
     expect(deleteFromCloudSpy).toHaveBeenCalled();
     expect(deleteNoteSpy).not.toHaveBeenCalled()
     expect(renderSideBarSpy).not.toHaveBeenCalled();
-    expect(saveToStorage).not.toHaveBeenCalled();
+    expect(saveToStorageSpy).not.toHaveBeenCalled();
 
     
   })

@@ -1,14 +1,16 @@
 import {buttonListener, editButtonListener, resetEditor, clearData} from './buttons.js'
 import { sideBarClose, sideBar, sideBarOpen, reloadPage} from './intial.js'
-import {saveButtonEdit, deleteFromCloud, notesList, deleteNote, displayNoteContent, saveToStorage,  initializingApp, setupAuthListeners} from './storage.js'
+import {saveButtonEdit, deleteFromCloud, notesList, deleteNote, displayNoteContent, saveToStorage,  initializingApp, setupAuthListeners, getSupabase, } from './storage.js'
 
 import { setupNoteItems} from './render.js';
 
 import {deleteButton,  renderSideBar, getCurrentId, setCurrentId} from './render.js'
 
-initializingApp(renderSideBar);
+const supaBase = getSupabase();
 
-
+initializingApp(renderSideBar, supaBase);
+/*fetchNotes(supaBase);
+saveToCloud()*/
 
 
 buttonListener(setCurrentId);
@@ -25,7 +27,8 @@ deleteButton({
   renderSideBar: renderSideBar,
   getNotes: () => notesList,
   saveToStorage: saveToStorage,
-  clearData: clearData
+  clearData: clearData,
+  supaBase: supaBase,
 })
 
   setupNoteItems(displayNoteContent,sideBarClose, resetEditor)
@@ -39,10 +42,11 @@ deleteButton({
       getCurrentId: getCurrentId,
       renderFn: renderSideBar,
       sideBarOpenFn: sideBarOpen,
-      clearDataFn: clearData
+      clearDataFn: clearData,
+      supaBase: supaBase,
     })
   })
   
-setupAuthListeners(renderSideBar)
+setupAuthListeners(renderSideBar, supaBase)
 
 reloadPage();

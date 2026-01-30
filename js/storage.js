@@ -1,19 +1,22 @@
 const SUPABASE_URL = "https://rhppahvvdlornlezxwpp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
 
+export function getSupabase () {
 const {createClient} = supabase;
-export const supaBase = createClient(SUPABASE_URL, SUPABASE_KEY );
+ return  createClient(SUPABASE_URL, SUPABASE_KEY );
+}
+
 
 export let CURRENT_USER_ID = null
 
 
-export async function initializingApp(renderSideBar) {
+export async function initializingApp(renderSideBar, supaBase) {
   const {data: {user}}  = await supaBase.auth.getUser();
 
 
   if (user) {
     CURRENT_USER_ID = user.id;
-    renderCloud(renderSideBar);
+    renderCloud(renderSideBar, supaBase);
   } else {
     document.getElementById('auth-modal').style.display = 'flex';
   }
@@ -22,7 +25,7 @@ export async function initializingApp(renderSideBar) {
 
 export let notesList = JSON.parse(localStorage.getItem('notesList')) ||[];
 
-export async function fetchNotes () {
+export async function fetchNotes (supaBase) {
   const {data: {user}} = await supaBase.auth.getUser();
   if (!user) {
     console.log('no user logged in');
@@ -44,7 +47,7 @@ export async function fetchNotes () {
   }
 }
 
-async function saveToCloud(content, title, id) {
+async function saveToCloud(content, title, id, supaBase) {
   const {data, error} = await supaBase
   .from('Notes')
   .upsert({
@@ -65,7 +68,7 @@ async function saveToCloud(content, title, id) {
 
 
 
-export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideBarOpenFn, clearDataFn}) {
+export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideBarOpenFn, clearDataFn, supaBase}) {
 
   const noteContentElement = document.querySelector('.js-note-pad')
   const noteContent = noteContentElement.value;
@@ -81,7 +84,7 @@ export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideB
 
   
 
-  const savedNote = await saveToCloud(noteContent, notesTitle, currentId)
+  const savedNote = await saveToCloud(noteContent, notesTitle, currentId, supaBase)
 
    if (savedNote) {
     const index = notesList.findIndex(n => n.id === savedNote.id);
@@ -99,8 +102,8 @@ export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideB
 }
 
 
-  export async function renderCloud(renderSideBar) {
-    const notes = await fetchNotes();
+  export async function renderCloud(renderSideBar, supaBase) {
+    const notes = await fetchNotes(supaBase);
 
     if (notes) {
       notesList = notes
@@ -147,7 +150,7 @@ export function deleteNote(id) {
 
 
 
-export function setupAuthListeners(renderSideBar) {
+export function setupAuthListeners(renderSideBar, supaBase) {
 
 supaBase.auth.onAuthStateChange((event, session) => {
   const authModal = document.getElementById('auth-modal');
@@ -156,7 +159,7 @@ supaBase.auth.onAuthStateChange((event, session) => {
     CURRENT_USER_ID = session.user.id;
     mainApp.style.display = 'flex';
     authModal.style.display = 'none';
-    renderCloud(renderSideBar);
+    renderCloud(renderSideBar, supaBase);
   } else {
     authModal.style.display ='flex';
     mainApp.style.display ='none';
@@ -200,12 +203,12 @@ document.getElementById('login-btn').addEventListener('click',async () => {
   } else {
     document.getElementById('auth-modal').style.display ='none';
     document.getElementById('main-app').style.display = 'flex';
-    renderCloud(renderSideBar)
+    renderCloud(renderSideBar, supaBase)
   }
 })
 }
 
-export async function deleteFromCloud (noteId) {
+export async function deleteFromCloud (noteId, supaBase) {
   const {error} = await supaBase
   .from('Notes')
   .delete()

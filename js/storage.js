@@ -1,5 +1,5 @@
-const SUPABASE_URL = "https://rhppahvvdlornlezxwpp.supabase.co";
-const SUPABASE_KEY = "sb_publishable_l2WvLQtxogH0zA1ejehZcw_mv8HuEFH";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
 
 export function getSupabase () {
 const {createClient} = supabase;

@@ -47,7 +47,7 @@ export async function fetchNotes (supaBase) {
   }
 }
 
-async function saveToCloud(content, title, id, supaBase) {
+export async function saveToCloud(content, title, id, supaBase) {
   const {data, error} = await supaBase
   .from('Notes')
   .upsert({
@@ -68,7 +68,7 @@ async function saveToCloud(content, title, id, supaBase) {
 
 
 
-export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideBarOpenFn, clearDataFn, supaBase}) {
+export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideBarOpenFn, clearDataFn, supaBase, saveToCloud}) {
 
   const noteContentElement = document.querySelector('.js-note-pad')
   const noteContent = noteContentElement.value;

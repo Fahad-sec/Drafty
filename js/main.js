@@ -1,6 +1,6 @@
 import {buttonListener, editButtonListener, resetEditor, clearData} from './buttons.js'
 import { sideBarClose, sideBar, sideBarOpen, reloadPage} from './intial.js'
-import {saveButtonEdit, deleteFromCloud, notesList, deleteNote, displayNoteContent, saveToStorage,  initializingApp, setupAuthListeners, getSupabase, } from './storage.js'
+import {saveButtonEdit, deleteFromCloud, notesList, deleteNote, displayNoteContent, saveToStorage,  initializingApp, setupAuthListeners, getSupabase,saveToCloud } from './storage.js'
 
 import { setupNoteItems} from './render.js';
 
@@ -44,6 +44,7 @@ deleteButton({
       sideBarOpenFn: sideBarOpen,
       clearDataFn: clearData,
       supaBase: supaBase,
+      saveToCloud: saveToCloud
     })
   })
   

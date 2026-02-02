@@ -1,29 +1,48 @@
-# Drafty 
-A lightwight, cloud-synced note-taking application built with Vanilla JavaScript and Supabase.
 
-Drafty evolved from a 6-day sprint using DOM manipulation into a full-stack Single-page-application using secure user authentication and real-time persistence.
+# Drafty
+A simple note-taking web-application using cloud-storage for data persistence. While having User-Authentication and a Complete CRUD LifeCycle and using Jamsine for testing.
 
-## Purpose:
-I developed Drafty to solidify my understanding of state management, asynchronous JavaScript, and the integration of third-party BaaS providers. It represents a way of building modern and secure software without the weight of heavy frameworks.
-## Technicals:
-- Frontend: HTML5, CSS3, Vanilla JavaScript (ES6+).
-- BaaS: Supabase's Database and Authentication
-- Deployment: Automated CI/CD pipline using Git and Vercel.
+## Project Evolution
+### v1: Local Foundation 
+- Started a simple project using DOM manipulation and Browser's storage.
+### v2: Cloud Integration 
+- Switched to a full-stack architecture using Supabase for PostgreSQL storage and User Authentication.
+### v3:
+- Architecture and Testing - Refactored the codebase using Dependency Injection for implementation of testing using the Jasmine Framework.
 
-## Features :
-- Secure Auth: Dedicated Login/Signup interface with session persistence.
-- Cloud Storage: Notes are synced to the cloud via Supabase Auth making user's notes available across devices.
-- Complete CRUD Lifecycle: Create, Delete, Update and delete effortlessly.
-- Smart Save Logic: Intelligent ID matching that distinguishes between new entries and edits to existing notes.
-- Edit notes: User can edit a note after enabling the editor mode using the Edit button and clicking the button again disables editor mode. While not enabling the edit mode inhibits you from accidently editing the note.
-- Automatic-Titling: Titles are generated automatically if the note's title is left blank.
-- Responsive Sidebar: Collapsible sidebar for a clean interface.
-- UUID: Database indexing using unique identifiers for every note.
+## Key Technical Achievements
+### Unit testing: 
+- Integrated the jasmine testing framework to verify 18+ critical specifications across auth logic, UI design and storage.
+## Dependency Injection
+- Refactored core business logic to use DI, allowing for isolated testing of functions by injecting mock dependencies.
+### Secured Environment Variables
+- Added secure management of environment variables to protect sensitive API key and database credentials.
+### Cloud persistence 
+- Full CRUD lifeCycle synced via Supabase, with smart logic to distinguish between new entries and existing note edits.
 
-## Evolution:
-Originally built to learn browser's localStorage and DOM manipulation, the latest version represents a complete infrastructure: 
+## Features
+### Secure Auth:
+- Login/Signup interface with persistent session management.
+### Complete CRUD:
+- Create, Read, Update and Delete notes seamlessly.
+### Edit Mode:
+- Editor toggle prevents accidental edits while browsing notes.
+### UI-UX
+- Automatic titling for untitled notes.
+- Responsive, collapsible sidebar for focused writing experience.
+- Automatic Editor mode turned on for new notes and off for existing ones.
 
-- Cloud Storage: Moved from localStorage to a PostgreSQL database via Supabase.
-- User and security: Integrated Supabase Auth, enabling private user accounts and data.
+## Tech Stack
+### Frontend:
+HTML5, CSS3, Vanilla JavaScript (ES6+)
+### Testing:
+Jasmine Framework
+### Deployement:
+Automated CI/CD pipeline via git and Vercel.
 
-- Session Management: Implemented persistent session management, ensuring users stay logged in across page reloads and browser closing.
+### Challenges
+### Cloud Storage:
+ At first I only intended to make a CRUD web-application using localStorage using to DOM manipulation to better my javascript skills however after it's completion. I researched how i can integrate Cloud Storage which led me to using a baas such as Supabase to handle not just the storage but also use User Authentication which turned it into much more than a simple project.
+
+### Refactoring:
+Before starting the testing with jasmine the whole codebase was written in spaghetti code and needed a complete refactoring to be able to run tests with Jasmine. which is why I used dependency injection to eliminate the need of imports inbetween files and resorted to a seperate file dedicated to calling functions (main.js), where all variable and functions are imported to be called.

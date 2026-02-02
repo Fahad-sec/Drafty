@@ -78,6 +78,7 @@ export async function saveButtonEdit({setCurrentId, getCurrentId,renderFn, sideB
   const currentId = getCurrentId()
 
   if (noteContent === '' && notesTitleInput === '') {
+    
     return ;
   }
   const notesTitle = notesTitleInput || noteContent.substring(0, 20);

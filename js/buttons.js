@@ -31,6 +31,15 @@ export function editButtonListener() {
 
       let isEditing = false;
 
+      if (titleInput.value === '') {
+        
+        titleInput.readOnly = false;
+        contentInput.readOnly = false;
+        editBtn.textContent = 'Close Editor';
+        editBtn.style.backgroundColor = 'red';
+        contentInput.focus();
+      }
+
       editBtn?.addEventListener('click', () => {
       isEditing = !isEditing;
 
@@ -43,7 +52,6 @@ export function editButtonListener() {
 
       } else {
         resetEditor(editBtn, titleInput, contentInput);
-        //saveButtonEdit();
       }
 
       })

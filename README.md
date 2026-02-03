@@ -2,21 +2,13 @@
 # Drafty
 A simple note-taking web-application using cloud-storage for data persistence. While having User-Authentication and a Complete CRUD LifeCycle and using Jamsine for testing.
 
-## Project Evolution
-### v1: Local Foundation 
-- Started a simple project using DOM manipulation and Browser's storage.
-### v2: Cloud Integration 
-- Switched to a full-stack architecture using Supabase for PostgreSQL storage and User Authentication.
-### v3:
-- Architecture and Testing - Refactored the codebase using Dependency Injection for implementation of testing using the Jasmine Framework.
-
 ## Key Technical Achievements
 ### Unit testing: 
 - Integrated the jasmine testing framework to verify 18+ critical specifications across auth logic, UI design and storage.
 ## Dependency Injection
-- Refactored core business logic to use DI, allowing for isolated testing of functions by injecting mock dependencies.
+- Refactored most of the codeBase to use DI, allowing for isolated testing of functions with Jasmine by injecting mock dependencies.
 ### Secured Environment Variables
-- Added secure management of environment variables to protect sensitive API key and database credentials.
+- Secured environment variables to protect sensitive API key and database credentials using vite and vercel. Before they are were hardcoded in the code.
 ### Cloud persistence 
 - Full CRUD lifeCycle synced via Supabase, with smart logic to distinguish between new entries and existing note edits.
 
@@ -34,13 +26,21 @@ A simple note-taking web-application using cloud-storage for data persistence. W
 
 ## Tech Stack
 ### Frontend:
-HTML5, CSS3, Vanilla JavaScript (ES6+)
+HTML5, CSS3, Vanilla JavaScript
 ### Testing:
 Jasmine Framework
 ### Deployement:
-Automated CI/CD pipeline via git and Vercel.
+Automated CI/CD pipeline using git-github and Vercel.
 
-### Challenges
+## Project Evolution
+### v1: Local Foundation 
+- Created a simple project using DOM manipulation and Browser's localStorage with a goal of improving JavaScript skills.
+### v2: Cloud Integration 
+- Switched to a full-stack architecture using Supabase for storage and User Authentication.
+### v3: Testing
+- Refactored the codebase using Dependency Injection for testing with Jasmine as before using DI testing was quite difficult and it game me a excuse to get better at parameter handling and working with Jasmine.
+
+## Challenges
 ### Cloud Storage:
  At first I only intended to make a CRUD web-application using localStorage using to DOM manipulation to better my javascript skills however after it's completion. I researched how i can integrate Cloud Storage which led me to using a baas such as Supabase to handle not just the storage but also use User Authentication which turned it into much more than a simple project.
 

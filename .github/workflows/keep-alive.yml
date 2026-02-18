@@ -1,0 +1,15 @@
+name: keep Supabase Alive
+on:
+  schedule:
+    - cron: '0 0 * * 1,4'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ping Supabase Database
+        run: |
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/Notes?select=*" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}"
